@@ -7,6 +7,7 @@ class Hero(models.Model):
     poder_principal = models.CharField(max_length=100)
     cidade = models.CharField(max_length=100)
     historia = models.TextField(blank=True, null=True)
+    email_contato = models.CharField(max_length=100)
     criado_em = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
