@@ -1,12 +1,17 @@
+# superbook/superbook/urls.py
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('heroes/', include('heroes.urls')),  # rotas do app heroes
-    path('posts/', include('posts.urls')),  # rotas do app posts
+    # path('', include('requisitos.urls')),
+    # path('aulas/', include('aulas.urls')),
+    path('heroes/', include('heroes.urls')),
+    path('posts/', include('posts.urls')),
+    path('villains/', include('villains.urls')),
 ]
 
-admin.site.site_header = "SuperBook Admin"
-admin.site.site_title = "SuperBook Painel"
-admin.site.index_title = "Bem-vindo ao SuperBook"
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
