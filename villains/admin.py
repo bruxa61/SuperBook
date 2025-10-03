@@ -1,8 +1,23 @@
-from django.contrib import admin
-from .models import Vilao
 
-@admin.register(Vilao)
-class VilaoAdmin(admin.ModelAdmin):
-    list_display = ("codinome", "cidade", "criado_em")
-    search_fields = ("codinome", "nome_real", "cidade")
-    readonly_fields = ("criado_em",)
+from django.contrib import admin
+from .models import Villain
+
+@admin.register(Villain)
+class VillainAdmin(admin.ModelAdmin):
+    list_display = ['codinome', 'nome_real', 'poder_principal', 'cidade', 'criado_em']
+    list_filter = ['cidade']
+    search_fields = ['codinome', 'nome_real', 'cidade']
+
+    fieldsets = (
+        ('Identidade Secreta', {
+            'fields': ('codinome', 'nome_real')
+        }),
+        ('Informações Gerais', {
+            'fields': ('poder_principal', 'cidade', 'historia')
+        }),
+        ('Dados de Registro', {
+            'fields': ('criado_em',)
+        }),
+    )
+
+    readonly_fields = ['criado_em']

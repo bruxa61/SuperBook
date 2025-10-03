@@ -7,7 +7,7 @@
   </div>
 
   <ul class="list-group">
-    {% for vilao in villains %}
+    {% for vilao in viloes %}
       <li class="list-group-item d-flex justify-content-between align-items-center">
         <a href="{% url 'detalhe_vilao' vilao.pk %}" class="text-dark text-decoration-none">{{ vilao.codinome }}</a>
         <div>
@@ -21,4 +21,3 @@
   </ul>
 </div>
 {% endblock %}
-

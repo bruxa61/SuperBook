@@ -8,4 +8,3 @@ urlpatterns = [
     path("<int:pk>/excluir/", views.VilaoDeleteView.as_view(), name="excluir_vilao"),
     path("<int:pk>/", views.VilaoDetailView.as_view(), name="detalhe_vilao"),
 ]
-
