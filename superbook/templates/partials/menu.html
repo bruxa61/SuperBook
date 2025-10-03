@@ -1,19 +1,52 @@
- {#  CODIGO CORRETO DO MENU.HTML  #}
-
 {% load static %}
-<div class="navbar-custom d-flex justify-content-between align-items-center mb-4">
-  <div class="d-flex align-items-center">
-    <img src="{% static 'img/logo.png' %}" class="brand-logo" alt="LogoSuperBook">
-    <span class="brand-title d-none d-sm-inline">SuperBook</span>
-  </div>
+<nav class="navbar-custom d-flex justify-content-between align-items-center">
+    <!-- Logo e título -->
+    <div class="d-flex align-items-center brand">
+        <img src="{% static 'img/logo.png' %}" class="brand-logo" alt="SuperBook Logo">
+        <span class="brand-title d-none d-sm-inline">SuperBook</span>
+    </div>
 
-  <div>
-    <a href="{% url 'lista_herois' %}" class="me-3">Heróis</a>
-    <a href="{% url 'lista_posts' %}" class="me-3">Posts</a>
-    <a href="{% url 'lista_viloes' %}" class="me-3">Vilões</a>
-  </div>
+    <!-- Menu de navegação -->
+    <div class="d-flex align-items-center gap-3">
+        <a href="{% url 'lista_herois' %}" class="nav-link-hero">
+            <i class="fas fa-shield-alt me-1"></i>
+            Heróis
+        </a>
+        <a href="{% url 'lista_posts' %}" class="nav-link-neutral">
+            <i class="fas fa-newspaper me-1"></i>
+            Posts
+        </a>
+        <a href="{% url 'lista_viloes' %}" class="nav-link-villain">
+            <i class="fas fa-mask me-1"></i>
+            Vilões
+        </a>
+    </div>
 
-  {% if user.hero.imagem %}
-    <img src="{{ user.hero.imagem.url }}" class="profile-pic" alt="">
-  {% endif %}
-</div>
+    <!-- Profile e ações do usuário -->
+    <div class="d-flex align-items-center gap-3">
+        {% if user.is_authenticated %}
+            {% if user.hero.imagem %}
+                <img src="{{ user.hero.imagem.url }}" class="profile-pic" alt="Foto do perfil" title="{{ user.hero.codinome }}">
+            {% else %}
+                <div class="profile-pic d-flex align-items-center justify-content-center bg-secondary">
+                    <i class="fas fa-user text-white"></i>
+                </div>
+            {% endif %}
+            <div class="dropdown">
+                <button class="btn btn-link text-white dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    {{ user.hero.codinome|default:user.username }}
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Perfil</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Configurações</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Sair</a></li>
+                </ul>
+            </div>
+        {% else %}
+        {% endif %}
+    </div>
+</nav>
+
+<!-- Font Awesome para ícones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
