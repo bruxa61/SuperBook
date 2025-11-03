@@ -1,8 +1,6 @@
 from django.db import models
 from heroes.models import Hero
 
-# Create your models here.
-
 class Post(models.Model):
     autor = models.ForeignKey(Hero, on_delete=models.CASCADE, related_name="posts")
     mensagem = models.TextField()
@@ -14,7 +12,7 @@ class Post(models.Model):
 
 class Like(models.Model):
     heroi = models.ForeignKey(Hero, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="likes")
     criado_em = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -22,3 +20,4 @@ class Like(models.Model):
 
     def __str__(self):
         return f"{self.heroi.codinome} curtiu {self.post.id}"
+
