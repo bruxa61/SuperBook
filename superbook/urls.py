@@ -4,23 +4,20 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from heroes.views import redirect_after_login
-from . import views
 
 admin.site.site_header = "SuperBook Admin"
 admin.site.site_title = "SuperBook Painel"
 admin.site.index_title = "Bem-vindo ao SuperBook"
 
 urlpatterns = [
-    path('', views.home, name='home'),
     path('admin/', admin.site.urls),
     path('heroes/', include('heroes.urls')),  # rotas do app heroes
     path('posts/', include('posts.urls')),    # rotas do app posts
     path('villains/', include('villains.urls')),
-
-# Autenticação (allauth)
+    
+     # Autenticação (allauth)
     path('accounts/', include('allauth.urls')),
     path("redirect/", redirect_after_login, name="redirect_after_login"),
-    
 ]
 
 if settings.DEBUG:
